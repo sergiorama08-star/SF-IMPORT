@@ -3,33 +3,37 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SF IMPORT | Importación de Vehículos en toda España</title>
+    <title>SF IMPORT | Importamos calidad, entregamos confianza</title>
     <style>
         :root {
-            --primary: #0f172a;
-            --secondary: #1e293b;
-            --accent: #2563eb;
-            --accent-hover: #1d4ed8;
-            --light-bg: #f8fafc;
-            --text-dark: #1e293b;
-            --text-muted: #64748b;
+            --bg-dark: #0a0f1d;
+            --bg-card: #131b2e;
+            --primary-gold: #d4af37;
+            --gold-hover: #f3cf55;
+            --silver: #e2e8f0;
+            --text-dark: #cbd5e1;
             --text-light: #ffffff;
-            --border: #e2e8f0;
+            --border-gold: rgba(212, 175, 55, 0.3);
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; }
-        body { color: var(--text-dark); line-height: 1.6; background-color: #ffffff; }
+        body { color: var(--text-dark); line-height: 1.6; background-color: var(--bg-dark); }
 
         /* Header & Navegación */
-        header { background: var(--primary); color: var(--text-light); padding: 1rem 2rem; position: sticky; top: 0; z-index: 1000; display: flex; justify-content: space-between; align-items: center; border-bottom: 3px solid var(--accent); }
-        .logo { font-size: 1.4rem; font-weight: 800; color: var(--text-light); text-decoration: none; letter-spacing: 0.5px; cursor: pointer; }
-        .logo span { color: var(--accent); }
-        nav { display: flex; gap: 1rem; align-items: center; }
-        nav a { color: var(--text-light); text-decoration: none; font-size: 0.9rem; font-weight: 500; transition: color 0.3s; cursor: pointer; padding: 0.3rem 0.6rem; border-radius: 4px; }
-        nav a:hover, nav a.active { color: #ffffff; background: rgba(37, 99, 235, 0.2); }
-        .nav-btn { background: var(--accent) !important; color: #fff !important; font-weight: bold; }
+        header { background: #050811; color: var(--text-light); padding: 0.8rem 2rem; position: sticky; top: 0; z-index: 1000; display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid var(--primary-gold); }
+        .logo-container { display: flex; align-items: center; gap: 12px; cursor: pointer; text-decoration: none; }
+        .logo-img { height: 50px; width: auto; border-radius: 4px; }
+        .logo-text { font-size: 1.3rem; font-weight: 800; color: #fff; letter-spacing: 1px; }
+        .logo-text span { color: var(--primary-gold); }
+        .logo-slogan { font-size: 0.65rem; color: var(--silver); letter-spacing: 1.5px; text-transform: uppercase; display: block; }
+        
+        nav { display: flex; gap: 0.8rem; align-items: center; }
+        nav a { color: var(--silver); text-decoration: none; font-size: 0.88rem; font-weight: 500; transition: all 0.3s; cursor: pointer; padding: 0.4rem 0.7rem; border-radius: 4px; }
+        nav a:hover, nav a.active { color: var(--primary-gold); background: rgba(212, 175, 55, 0.1); }
+        .nav-btn { background: linear-gradient(135deg, #d4af37, #aa820a) !important; color: #000 !important; font-weight: bold; border-radius: 4px; }
+        .nav-btn:hover { background: var(--gold-hover) !important; }
 
-        /* Control de Visibilidad de Páginas */
+        /* Visibilidad de Páginas */
         .page { display: none; }
         .page.active-page { display: block; animation: fadeIn 0.4s ease-in-out; }
 
@@ -39,255 +43,337 @@
         }
 
         /* Hero General */
-        .hero { background: linear-gradient(rgba(15,23,42,0.88), rgba(15,23,42,0.88)), url('https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=1500&q=80') center/cover; color: var(--text-light); text-align: center; padding: 5rem 1.5rem 6rem; }
-        .hero h1 { font-size: 2.6rem; margin-bottom: 1rem; text-transform: uppercase; }
-        .hero p { font-size: 1.15rem; max-width: 750px; margin: 0 auto 2rem; color: #cbd5e1; }
+        .hero { background: linear-gradient(rgba(10,15,29,0.92), rgba(10,15,29,0.92)), url('https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=1500&q=80') center/cover; color: var(--text-light); text-align: center; padding: 5.5rem 1.5rem 6.5rem; border-bottom: 1px solid var(--border-gold); }
+        .hero h1 { font-size: 2.8rem; margin-bottom: 1rem; text-transform: uppercase; color: #fff; letter-spacing: 1px; }
+        .hero h1 span { color: var(--primary-gold); }
+        .hero p { font-size: 1.15rem; max-width: 800px; margin: 0 auto 2.5rem; color: var(--silver); }
 
-        .page-header { background: var(--secondary); color: white; padding: 3rem 1.5rem; text-align: center; border-bottom: 3px solid var(--accent); }
-        .page-header h1 { font-size: 2.2rem; text-transform: uppercase; }
-        .page-header p { color: #94a3b8; max-width: 600px; margin: 0.5rem auto 0; }
+        .page-header { background: #070b16; color: white; padding: 3rem 1.5rem; text-align: center; border-bottom: 2px solid var(--primary-gold); }
+        .page-header h1 { font-size: 2.4rem; text-transform: uppercase; color: var(--primary-gold); }
+        .page-header p { color: var(--silver); max-width: 600px; margin: 0.5rem auto 0; }
 
         /* Botones */
-        .btn { display: inline-block; background: var(--accent); color: #fff; padding: 0.8rem 1.6rem; text-decoration: none; font-weight: bold; border-radius: 4px; border: none; cursor: pointer; transition: background 0.3s; }
-        .btn:hover { background: var(--accent-hover); }
-        .btn-outline { background: transparent; color: var(--text-light); border: 2px solid var(--accent); margin-left: 0.5rem; }
-        .btn-outline:hover { background: var(--accent); color: #fff; }
+        .btn { display: inline-block; background: linear-gradient(135deg, #d4af37, #b88e14); color: #000; padding: 0.85rem 1.6rem; text-decoration: none; font-weight: bold; border-radius: 4px; border: none; cursor: pointer; transition: all 0.3s; text-transform: uppercase; font-size: 0.85rem; }
+        .btn:hover { background: var(--gold-hover); transform: translateY(-2px); box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3); }
+        .btn-outline { background: transparent; color: var(--text-light); border: 2px solid var(--primary-gold); margin-left: 0.8rem; }
+        .btn-outline:hover { background: var(--primary-gold); color: #000; }
 
         /* Secciones y Grillas */
-        section { padding: 4rem 1.5rem; max-width: 1200px; margin: 0 auto; }
-        .section-title { text-align: center; font-size: 2rem; margin-bottom: 0.5rem; color: var(--primary); text-transform: uppercase; }
-        .section-subtitle { text-align: center; color: var(--text-muted); margin-bottom: 3rem; font-size: 1rem; }
+        section { padding: 4.5rem 1.5rem; max-width: 1200px; margin: 0 auto; }
+        .section-title { text-align: center; font-size: 2.2rem; margin-bottom: 0.5rem; color: #fff; text-transform: uppercase; }
+        .section-title span { color: var(--primary-gold); }
+        .section-subtitle { text-align: center; color: var(--silver); margin-bottom: 3.5rem; font-size: 1.05rem; }
 
         .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; }
-        .grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 2.5rem; align-items: center; }
+        .grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 3rem; align-items: center; }
 
-        /* Tarjetas */
-        .card { background: var(--light-bg); padding: 2rem; border-radius: 8px; border-top: 4px solid var(--accent); box-shadow: 0 2px 8px rgba(0,0,0,0.04); }
-        .card h3 { margin-bottom: 0.8rem; color: var(--primary); }
+        /* Tarjetas de Servicio y Unidades */
+        .card { background: var(--bg-card); padding: 2rem; border-radius: 8px; border: 1px solid var(--border-gold); border-top: 4px solid var(--primary-gold); box-shadow: 0 4px 20px rgba(0,0,0,0.3); }
+        .card h3 { margin-bottom: 0.8rem; color: var(--primary-gold); font-size: 1.3rem; }
+
+        .car-card { background: var(--bg-card); border-radius: 8px; overflow: hidden; border: 1px solid var(--border-gold); transition: transform 0.3s; }
+        .car-card:hover { transform: translateY(-5px); }
+        .car-img-box { position: relative; width: 100%; height: 220px; overflow: hidden; }
+        .car-img-box img { width: 100%; height: 100%; object-fit: cover; }
+        .car-badge { position: absolute; top: 12px; right: 12px; background: var(--primary-gold); color: #000; padding: 4px 10px; font-weight: bold; font-size: 0.75rem; border-radius: 4px; text-transform: uppercase; }
+        .car-body { padding: 1.5rem; }
+        .car-title { font-size: 1.3rem; color: #fff; margin-bottom: 0.4rem; }
+        .car-price { font-size: 1.4rem; color: var(--primary-gold); font-weight: 800; margin-bottom: 1rem; }
+        .car-specs { display: grid; grid-template-columns: 1fr 1fr; gap: 0.6rem; font-size: 0.85rem; color: var(--silver); margin-bottom: 1.2rem; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 0.8rem; }
 
         /* Formulario */
-        .form-box { background: var(--secondary); color: white; padding: 2.5rem; border-radius: 8px; max-width: 800px; margin: 0 auto; }
-        .form-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem; margin-top: 1.5rem; }
-        .form-grid input, .form-grid select, .form-grid textarea { padding: 0.8rem; border-radius: 4px; border: 1px solid #475569; background: #334155; color: white; width: 100%; outline: none; }
+        .form-box { background: var(--bg-card); color: white; padding: 2.5rem; border-radius: 8px; border: 1px solid var(--border-gold); max-width: 800px; margin: 0 auto; box-shadow: 0 8px 30px rgba(0,0,0,0.5); }
+        .form-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1.2rem; margin-top: 1.5rem; }
+        .form-grid input, .form-grid select, .form-grid textarea { padding: 0.9rem; border-radius: 4px; border: 1px solid rgba(212,175,55,0.3); background: #0a0f1d; color: white; width: 100%; outline: none; }
+        .form-grid input:focus, .form-grid select:focus, .form-grid textarea:focus { border-color: var(--primary-gold); }
         .form-grid textarea { grid-column: 1 / -1; height: 110px; }
 
-        /* FAQ Accordion */
-        .faq-item { background: var(--light-bg); padding: 1.5rem; border-radius: 6px; margin-bottom: 1.2rem; border: 1px solid var(--border); }
-        .faq-item h3 { font-size: 1.1rem; color: var(--primary); margin-bottom: 0.5rem; }
+        /* FAQ */
+        .faq-item { background: var(--bg-card); padding: 1.8rem; border-radius: 6px; margin-bottom: 1.2rem; border: 1px solid var(--border-gold); }
+        .faq-item h3 { font-size: 1.15rem; color: var(--primary-gold); margin-bottom: 0.5rem; }
 
         /* Pasos del Proceso */
-        .step-card { background: #fff; border: 1px solid var(--border); border-radius: 8px; padding: 2rem; box-shadow: 0 4px 12px rgba(0,0,0,0.04); position: relative; margin-bottom: 1.5rem; }
-        .step-number { font-size: 2rem; font-weight: 800; color: var(--accent); background: #eff6ff; width: 50px; height: 50px; display: flex; align-items: center; justify-content: center; border-radius: 50%; margin-bottom: 1rem; }
+        .step-card { background: var(--bg-card); border: 1px solid var(--border-gold); border-radius: 8px; padding: 2rem; margin-bottom: 1.5rem; }
+        .step-number { font-size: 1.5rem; font-weight: 800; color: #000; background: var(--primary-gold); width: 45px; height: 45px; display: flex; align-items: center; justify-content: center; border-radius: 50%; margin-bottom: 1rem; }
 
         /* Footer */
-        footer { background: #0f172a; color: #94a3b8; padding: 3rem 1.5rem 1.5rem; font-size: 0.9rem; margin-top: 3rem; }
-        .footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 2rem; max-width: 1200px; margin: 0 auto 2rem; }
-        .footer-grid h4 { color: white; margin-bottom: 1rem; text-transform: uppercase; font-size: 0.95rem; }
-        .footer-grid a { color: #94a3b8; text-decoration: none; display: block; margin-bottom: 0.5rem; cursor: pointer; }
-        .footer-grid a:hover { color: var(--accent); }
-        .footer-bottom { text-align: center; border-top: 1px solid #1e293b; padding-top: 1.5rem; color: #64748b; }
+        footer { background: #050811; color: var(--silver); padding: 3.5rem 1.5rem 1.5rem; font-size: 0.9rem; margin-top: 4rem; border-top: 1px solid var(--border-gold); }
+        .footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 2rem; max-width: 1200px; margin: 0 auto 2.5rem; }
+        .footer-grid h4 { color: var(--primary-gold); margin-bottom: 1rem; text-transform: uppercase; font-size: 0.95rem; letter-spacing: 1px; }
+        .footer-grid a { color: var(--silver); text-decoration: none; display: block; margin-bottom: 0.6rem; cursor: pointer; transition: color 0.3s; }
+        .footer-grid a:hover { color: var(--primary-gold); }
+        .footer-bottom { text-align: center; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 1.5rem; color: #64748b; }
 
         /* WhatsApp Flotante */
-        .whatsapp-float { position: fixed; bottom: 20px; right: 20px; background: #25d366; color: white; padding: 12px 22px; border-radius: 50px; text-decoration: none; font-weight: bold; box-shadow: 0 4px 15px rgba(0,0,0,0.3); z-index: 1000; display: flex; align-items: center; gap: 8px; }
+        .whatsapp-float { position: fixed; bottom: 20px; right: 20px; background: #25d366; color: white; padding: 12px 22px; border-radius: 50px; text-decoration: none; font-weight: bold; box-shadow: 0 4px 20px rgba(0,0,0,0.5); z-index: 1000; display: flex; align-items: center; gap: 8px; transition: transform 0.3s; }
+        .whatsapp-float:hover { transform: scale(1.05); }
 
         @media (max-width: 768px) {
             header { flex-direction: column; gap: 1rem; text-align: center; }
             nav { flex-wrap: wrap; justify-content: center; }
-            .hero h1 { font-size: 2rem; }
+            .hero h1 { font-size: 2.1rem; }
             .grid-2 { grid-template-columns: 1fr; }
         }
     </style>
 </head>
 <body>
 
-    <!-- Header y Navegación -->
+    <!-- Header -->
     <header>
-        <a class="logo" onclick="navigateTo('inicio')">SF <span>IMPORT</span></a>
+        <a class="logo-container" onclick="navigateTo('inicio')">
+            <img src="logo.png" alt="SF IMPORT Logo" class="logo-img" onerror="this.style.display='none'">
+            <div>
+                <div class="logo-text">SF <span>IMPORT</span></div>
+                <span class="logo-slogan">Importamos calidad, entregamos confianza</span>
+            </div>
+        </a>
         <nav>
             <a onclick="navigateTo('inicio')" id="nav-inicio" class="active">Inicio</a>
+            <a onclick="navigateTo('unidades')" id="nav-unidades">Unidades Disponibles</a>
             <a onclick="navigateTo('servicios')" id="nav-servicios">Servicios</a>
-            <a onclick="navigateTo('proceso')" id="nav-proceso">Proceso de Importación</a>
-            <a onclick="navigateTo('nosotros')" id="nav-nosotros">Sobre SF IMPORT</a>
+            <a onclick="navigateTo('proceso')" id="nav-proceso">Proceso</a>
+            <a onclick="navigateTo('nosotros')" id="nav-nosotros">Sobre Nosotros</a>
             <a onclick="navigateTo('faq')" id="nav-faq">FAQ</a>
-            <a onclick="navigateTo('contacto')" id="nav-contacto" class="nav-btn">Contacto / Encargo</a>
+            <a onclick="navigateTo('contacto')" id="nav-contacto" class="nav-btn">Solicitar Encargo</a>
         </nav>
     </header>
 
     <!-- ==================== PÁGINA 1: INICIO ==================== -->
     <div id="page-inicio" class="page active-page">
         <div class="hero">
-            <h1>Importación de Vehículos a la Carta en Toda España</h1>
-            <p>En <strong>SF IMPORT</strong> nos encargamos de la búsqueda, inspección en origen (Alemania y resto de Europa), transporte asegurado y matriculación completa para entregar tu coche listo para rodar en cualquier punto de España.</p>
+            <h1>Importación de Vehículos <span>desde Alemania a España</span></h1>
+            <p>Especialistas en la localización, verificación técnica, transporte e importación directa a la carta para clientes en toda España.</p>
             <div>
-                <a onclick="navigateTo('contacto')" class="btn">Solicitar estudio gratuito</a>
-                <a onclick="navigateTo('proceso')" class="btn btn-outline">Ver proceso paso a paso</a>
+                <a onclick="navigateTo('unidades')" class="btn">Ver Unidades Ejemplo</a>
+                <a onclick="navigateTo('contacto')" class="btn btn-outline">Solicitar Encargo</a>
             </div>
         </div>
 
         <section>
-            <h2 class="section-title">¿Por qué elegir SF IMPORT?</h2>
-            <p class="section-subtitle">Garantía, profesionalidad y entregas directas a domicilio en toda la península e islas.</p>
+            <h2 class="section-title">Servicio 100% <span>Especializado en Alemania</span></h2>
+            <p class="section-subtitle">No compramos coches usados locales. Garantizamos vehículos alemanes verificados e historial transparente.</p>
             <div class="grid-3">
                 <div class="card">
-                    <h3>Cobertura Nacional</h3>
-                    <p>Gestionamos la entrega directa de tu vehículo en cualquier punto de España con todos los trámites legales y de matriculación resueltos.</p>
+                    <h3>Encargos Exclusivos</h3>
+                    <p>Búsqueda personalizada según tus gustos, presupuesto y equipamiento en concesionarios oficiales germanos.</p>
                 </div>
                 <div class="card">
-                    <h3>Verificación en Origen</h3>
-                    <p>Revisión técnica minuciosa del historial, mantenimiento en servicio oficial, kilometraje real y certificación de ausencia de daños.</p>
+                    <h3>Certificación Técnica</h3>
+                    <p>Comprobación de historial, lectura de kilómetros reales y revisión estructural completa antes de la compra.</p>
                 </div>
                 <div class="card">
-                    <h3>Aceptamos tu Coche</h3>
-                    <p>Tasamos y valoramos tu coche actual como parte de pago para ponértelo aún más fácil al estrenar tu vehículo de importación.</p>
+                    <h3>Entrega Llave en Mano</h3>
+                    <p>Trámites ITV, Impuesto de Matriculación y entrega con matriculación española en la puerta de tu casa.</p>
                 </div>
             </div>
         </section>
     </div>
 
-    <!-- ==================== PÁGINA 2: SERVICIOS ==================== -->
+    <!-- ==================== PÁGINA 2: UNIDADES DISPONIBLES ==================== -->
+    <div id="page-unidades" class="page">
+        <div class="page-header">
+            <h1>Unidades y Ejemplos de Importación</h1>
+            <p>Selección de vehículos importados o disponibles bajo pedido directo desde Alemania.</p>
+        </div>
+        <section>
+            <div class="grid-3">
+
+                <!-- Unidad 1 -->
+                <div class="car-card">
+                    <div class="car-img-box">
+                        <img src="https://images.unsplash.com/photo-1603584173870-7f23fdae1b7a?auto=format&fit=crop&w=800&q=80" alt="Audi A4 Avant S-Line">
+                        <span class="car-badge">Bajo Encargo</span>
+                    </div>
+                    <div class="car-body">
+                        <div class="car-title">Audi A4 Avant 40 TDI S-Line</div>
+                        <div class="car-price">Consultar Presupuesto</div>
+                        <div class="car-specs">
+                            <span>📅 Año: 2022</span>
+                            <span>🛣️ Km: 45.000 km</span>
+                            <span>⛽ Diésel Hybrid</span>
+                            <span>⚙️ S-Tronic Auto</span>
+                        </div>
+                        <a href="https://wa.me/34622940508?text=Hola,%20busco%20informaci%C3%B3n%20sobre%20un%20Audi%20A4%20similar%20al%20de%20Unidades%20Disponibles" target="_blank" class="btn" style="width: 100%; text-align: center;">Consultar este Coche</a>
+                    </div>
+                </div>
+
+                <!-- Unidad 2 -->
+                <div class="car-card">
+                    <div class="car-img-box">
+                        <img src="https://images.unsplash.com/photo-1555215695-3004980ad54e?auto=format&fit=crop&w=800&q=80" alt="BMW Serie 3 Touring">
+                        <span class="car-badge">Bajo Encargo</span>
+                    </div>
+                    <div class="car-body">
+                        <div class="car-title">BMW 320d Touring M Sport</div>
+                        <div class="car-price">Consultar Presupuesto</div>
+                        <div class="car-specs">
+                            <span>📅 Año: 2021</span>
+                            <span>🛣️ Km: 58.000 km</span>
+                            <span>⛽ Diésel Mild-Hybrid</span>
+                            <span>⚙️ Automático 8v</span>
+                        </div>
+                        <a href="https://wa.me/34622940508?text=Hola,%20me%20interesa%20un%20BMW%20Serie%203%20Touring%20importado%20desde%20Alemania" target="_blank" class="btn" style="width: 100%; text-align: center;">Consultar este Coche</a>
+                    </div>
+                </div>
+
+                <!-- Unidad 3 -->
+                <div class="car-card">
+                    <div class="car-img-box">
+                        <img src="https://images.unsplash.com/photo-1618843479313-40f8afb4b4d8?auto=format&fit=crop&w=800&q=80" alt="Mercedes AMG Clase C">
+                        <span class="car-badge">Bajo Encargo</span>
+                    </div>
+                    <div class="car-body">
+                        <div class="car-title">Mercedes-Benz Clase C Coupe</div>
+                        <div class="car-price">Consultar Presupuesto</div>
+                        <div class="car-specs">
+                            <span>📅 Año: 2023</span>
+                            <span>🛣️ Km: 28.000 km</span>
+                            <span>⛽ Gasolina Mild-Hybrid</span>
+                            <span>⚙️ 9G-Tronic</span>
+                        </div>
+                        <a href="https://wa.me/34622940508?text=Hola,%20me%20gustar%C3%ADa%20importar%20un%20Mercedes%20Clase%20C%20Coupe%20desde%20Alemania" target="_blank" class="btn" style="width: 100%; text-align: center;">Consultar este Coche</a>
+                    </div>
+                </div>
+
+            </div>
+            <p style="text-align: center; margin-top: 3rem; color: var(--silver);">¿Tienes un modelo específico en mente? <a onclick="navigateTo('contacto')" style="color: var(--primary-gold); cursor: pointer; text-decoration: underline;">Pídenoslo a la carta aquí</a>.</p>
+        </section>
+    </div>
+
+    <!-- ==================== PÁGINA 3: SERVICIOS ==================== -->
     <div id="page-servicios" class="page">
         <div class="page-header">
-            <h1>Nuestros Servicios de Importación</h1>
-            <p>Soluciones integrales para la adquisición e importación de tu vehículo con total seguridad en España.</p>
+            <h1>Servicios de Importación Exclusivos</h1>
+            <p>Trámites integrales para traer tu vehículo directo desde Alemania a España.</p>
         </div>
         <section>
             <div class="grid-3">
                 <div class="card">
-                    <h3>Importación a la Carta</h3>
-                    <p>Búsqueda y selección de las mejores unidades en Europa (Audi, BMW, Mercedes-Benz, Porsche, Volkswagen) adaptadas a tu presupuesto.</p>
+                    <h3>Encargo a la Carta</h3>
+                    <p>Búsqueda y negociación en concesionarios oficiales (Audi, BMW, Mercedes-Benz, Porsche, Volkswagen).</p>
                 </div>
                 <div class="card">
-                    <h3>Gestión de Impuestos y DGT</h3>
-                    <p>Cálculo de impuestos de matriculación, tramitación de Ficha Reducida y gestión completa ante la Agencia Tributaria y la DGT.</p>
+                    <h3>Gestión Fiscal y Matriculación</h3>
+                    <p>Liquidación del Impuesto de Matriculación, Ficha Reducida y matrícula definitiva en España.</p>
                 </div>
                 <div class="card">
-                    <h3>Inspección Documental y Técnica</h3>
-                    <p>Análisis exhaustivo de la Ficha Técnica, Certificado de Conformidad Europeo (COC) y comprobación mecánica previa.</p>
+                    <h3>Inspección en Origen</h3>
+                    <p>Verificación técnica del Certificado de Conformidad Europeo (COC), historial de servicios y kilometraje real.</p>
                 </div>
                 <div class="card">
-                    <h3>Transporte Aislado y Asegurado</h3>
-                    <p>Transporte internacional en porta-vehículos con seguro a todo riesgo directamente hasta tu puerta en cualquier provincia.</p>
+                    <h3>Transporte Asegurado</h3>
+                    <p>Carga y traslado en camión porta-vehículos asegurado a todo riesgo hasta la entrega.</p>
                 </div>
                 <div class="card">
-                    <h3>Tasación de Vehículo Usado</h3>
-                    <p>Valoración justa de tu coche actual para descontar del importe final del encargo de importación.</p>
+                    <h3>Garantía Europea</h3>
+                    <p>Conservación de la garantía oficial del fabricante válida en talleres de toda España.</p>
                 </div>
                 <div class="card">
-                    <h3>Importadores Certificados</h3>
-                    <p>Atención personalizada por profesionales cualificados supervisando cada detalle de la transacción internacional.</p>
+                    <h3>Atención Personalizada</h3>
+                    <p>Asesoramiento cercano en cada etapa con informe de fotos y vídeos previos a la adquisición.</p>
                 </div>
             </div>
         </section>
     </div>
 
-    <!-- ==================== PÁGINA 3: PROCESO ==================== -->
+    <!-- ==================== PÁGINA 4: PROCESO ==================== -->
     <div id="page-proceso" class="page">
         <div class="page-header">
-            <h1>El Proceso de Importación Paso a Paso</h1>
-            <p>Transparencia total desde la selección del vehículo hasta la entrega de llaves.</p>
+            <h1>Proceso de Encargo Paso a Paso</h1>
+            <p>Transparencia absoluta desde la selección inicial hasta la matriculación final.</p>
         </div>
         <section style="max-width: 900px;">
             <div class="step-card">
                 <div class="step-number">1</div>
-                <h3>1. Búsqueda y Estudio de Mercado</h3>
-                <p>Analizamos las opciones disponibles en Europa según tus criterios o estudiamos el enlace del coche que nos proporciones.</p>
+                <h3>1. Selección y Presupuesto</h3>
+                <p>Nos indicas el modelo, versión y extras que buscas (o nos envías un enlace de Mobile.de/Autoscout24).</p>
             </div>
             <div class="step-card">
                 <div class="step-number">2</div>
-                <h3>2. Verificación e Inspección</h3>
-                <p>Revisamos la documentación, historial de revisiones, estado técnico e historial de siniestralidad antes de realizar ningún pago.</p>
+                <h3>2. Verificación Técnica en Alemania</h3>
+                <p>Comprobamos el estado mecánico, libro de mantenimiento, ausencia de siniestros y documentación del concesionario.</p>
             </div>
             <div class="step-card">
                 <div class="step-number">3</div>
-                <h3>3. Compra y Transporte Asegurado</h3>
-                <p>Gestionamos la compra legal con factura/contrato y coordinamos el transporte asegurado en camión hacia tu ciudad.</p>
+                <h3>3. Compra y Transporte Seguro</h3>
+                <p>Formalizamos el contrato oficial y coordinamos el transporte seguro en camión hasta España.</p>
             </div>
             <div class="step-card">
                 <div class="step-number">4</div>
-                <h3>4. ITV, Matriculación y Entrega</h3>
-                <p>Supervisamos la ITV de importación, liquidamos los impuestos correspondientes y te entregamos el coche matriculado en tu domicilio en España.</p>
+                <h3>4. ITV, Impuestos y Entrega</h3>
+                <p>Superamos la ITV de importación, gestionamos la matriculación y te entregamos tu coche listo para circular.</p>
             </div>
         </section>
     </div>
 
-    <!-- ==================== PÁGINA 4: SOBRE SF IMPORT ==================== -->
+    <!-- ==================== PÁGINA 5: SOBRE NOSOTROS ==================== -->
     <div id="page-nosotros" class="page">
         <div class="page-header">
             <h1>Sobre SF IMPORT</h1>
-            <p>Especialistas certificados en gestión e importación de vehículos de alta gama y ocasión en España.</p>
+            <p>Importamos calidad, entregamos confianza.</p>
         </div>
         <section>
             <div class="grid-2">
                 <div>
-                    <h2 style="color: var(--primary); margin-bottom: 1rem;">Líderes en Importación Vehicular</h2>
-                    <p style="margin-bottom: 1rem;">En <strong>SF IMPORT</strong> nos dedicamos a hacer accesible el mercado del automóvil europeo a compradores de toda España, eliminando todos los riesgos habituales del proceso.</p>
-                    <p style="margin-bottom: 1rem;">El mercado centroeuropeo ofrece vehículos con mayor nivel de equipamiento, historiales de mantenimiento estrictos en concesionario oficial y precios más competitivos. Nuestro equipo de importadores certificados gestiona la transacción con absoluta seguridad jurídica.</p>
-                    <p>Nos encargamos de todo el flujo de trabajo: negociación, contrato internacional, transporte, Ficha Reducida, Impuesto de Matriculación y entrega final.</p>
+                    <h2 style="color: var(--primary-gold); margin-bottom: 1.2rem;">Expertos en Importación desde Alemania</h2>
+                    <p style="margin-bottom: 1rem;">En <strong>SF IMPORT</strong> nos centramos exclusivamente en gestionar encargos de importación desde Alemania hacia cualquier punto de España.</p>
+                    <p style="margin-bottom: 1rem;">El mercado germano destaca por contar con coches mejor mantenidos, con un nivel de equipamiento superior y precios más competitivos. Nos encargamos de auditar cada coche para asegurar que tu compra sea 100% segura.</p>
+                    <p>No realizamos compraventas locales ni tasaciones: nos dedicamos íntegramente a hacer realidad el encargo de tu coche perfecto.</p>
                 </div>
                 <div>
-                    <img src="https://images.unsplash.com/photo-1563720223185-11003d516935?auto=format&fit=crop&w=800&q=80" alt="SF IMPORT Vehículos" style="width: 100%; border-radius: 8px; box-shadow: 0 8px 20px rgba(0,0,0,0.12);">
+                    <img src="https://images.unsplash.com/photo-1563720223185-11003d516935?auto=format&fit=crop&w=800&q=80" alt="SF IMPORT Alemania" style="width: 100%; border-radius: 8px; border: 1px solid var(--border-gold); box-shadow: 0 8px 25px rgba(0,0,0,0.5);">
                 </div>
             </div>
         </section>
     </div>
 
-    <!-- ==================== PÁGINA 5: FAQ ==================== -->
+    <!-- ==================== PÁGINA 6: FAQ ==================== -->
     <div id="page-faq" class="page">
         <div class="page-header">
             <h1>Preguntas Frecuentes</h1>
-            <p>Resolvemos todas tus dudas sobre importación, entregas e impuestos.</p>
+            <p>Todo lo que necesitas saber antes de importar tu vehículo.</p>
         </div>
         <section style="max-width: 900px;">
             <div class="faq-item">
-                <h3>¿Hacen entregas en toda España?</h3>
-                <p>Sí, realizamos el transporte e inspección final para entregar tu vehículo listo para circular en cualquier provincia o ciudad de España.</p>
+                <h3>¿Aceptan mi coche actual a cambio?</h3>
+                <p>No, en SF IMPORT trabajamos exclusivamente como servicio de gestión de encargos directos de importación desde Alemania a España.</p>
             </div>
             <div class="faq-item">
-                <h3>¿Cuánto tiempo tarda la importación?</h3>
-                <p>El plazo medio oscila entre 2 y 3 semanas desde que se formaliza la compra del vehículo hasta su entrega matriculado.</p>
+                <h3>¿Cuánto tiempo tarda el proceso completo?</h3>
+                <p>El proceso completo de búsqueda, transporte, paso por ITV y matriculación final suele tardar aproximadamente 2 y 3 semanas.</p>
             </div>
             <div class="faq-item">
-                <h3>¿Los vehículos tienen garantía en España?</h3>
-                <p>Sí, los coches conservan la garantía oficial del fabricante a nivel europeo o disponen de una garantía mecánica con cobertura nacional completa.</p>
-            </div>
-            <div class="faq-item">
-                <h3>¿Puedo dar mi coche como parte de pago?</h3>
-                <p>Efectivamente. Tasamos tu vehículo actual para descontar su importe directamente de la operación.</p>
+                <h3>¿Puedo mandar un enlace de un coche que haya visto yo?</h3>
+                <p>¡Por supuesto! Si has encontrado una unidad en portales como Mobile.de o AutoScout24, nos envías el enlace y realizamos todas las verificaciones y gestión de compra por ti.</p>
             </div>
         </section>
     </div>
 
-    <!-- ==================== PÁGINA 6: CONTACTO Y ENCARGO ==================== -->
+    <!-- ==================== PÁGINA 7: CONTACTO ==================== -->
     <div id="page-contacto" class="page">
         <div class="page-header">
-            <h1>Solicitar Encargo de Vehículo</h1>
-            <p>Rellena tus datos para recibir una propuesta sin compromiso directamente en nuestro correo.</p>
+            <h1>Solicitar Encargo</h1>
+            <p>Envíanos los detalles del coche que buscas y te responderemos con un estudio detallado.</p>
         </div>
         <section>
             <div class="form-box">
-                <h3 style="color: var(--accent); text-align: center; margin-bottom: 1rem;">Formulario de Importación SF IMPORT</h3>
+                <h3 style="color: var(--primary-gold); text-align: center; margin-bottom: 0.5rem; text-transform: uppercase;">Formulario de Solicitud SF IMPORT</h3>
                 
-                <!-- Formulario conectado a Formspree enviando a sergiorama08@gmail.com -->
                 <form action="https://formsubmit.co/sergiorama08@gmail.com" method="POST">
                     <div class="form-grid">
-                        <input type="text" name="Nombre" placeholder="Tu Nombre y Apellidos" required>
-                        <input type="tel" name="Telefono" placeholder="Teléfono de Contacto (Obligatorio)" required>
-                        <input type="email" name="Email" placeholder="Tu Correo Electrónico" required>
-                        <input type="text" name="Vehiculo_Deseado" placeholder="Marca y Modelo (ej. BMW Serie 3 M-Sport)" required>
+                        <input type="text" name="Nombre" placeholder="Nombre y Apellidos" required>
+                        <input type="tel" name="Telefono" placeholder="Teléfono de Contacto" required>
+                        <input type="email" name="Email" placeholder="Correo Electrónico" required>
+                        <input type="text" name="Vehiculo_Deseado" placeholder="Marca y Modelo (Ej: Audi RS3, BMW M3)" required>
                         <input type="text" name="Presupuesto" placeholder="Presupuesto Máximo (€)" required>
                         <select name="Ano_Minimo">
-                            <option value="">Año mínimo deseado</option>
+                            <option value="">Año mínimo</option>
                             <option>2024</option>
                             <option>2023</option>
                             <option>2022</option>
                             <option>2021 o anterior</option>
                         </select>
-                        <select name="Entrega_Coche_A_Cambio">
-                            <option value="">¿Quieres entregar coche a cambio?</option>
-                            <option>No</option>
-                            <option>Sí, solicitar tasación</option>
-                        </select>
-                        <textarea name="Detalles_Adicionales" placeholder="Detalles de equipamiento (color, techo solar, cambio automático, asientos calefactables, etc.)"></textarea>
+                        <textarea name="Detalles" placeholder="Indica detalles (color, equipamiento indispensable, motorización...)"></textarea>
                         
                         <button type="submit" class="btn" style="grid-column: 1 / -1; width: 100%;">Enviar Encargo a SF IMPORT</button>
                     </div>
@@ -300,34 +386,34 @@
     <footer>
         <div class="footer-grid">
             <div>
-                <h4 style="color: var(--accent);">SF IMPORT</h4>
-                <p>Especialistas en importación y matriculación vehicular en toda España. Calidad, garantía y entregas a domicilio.</p>
+                <h4>SF IMPORT</h4>
+                <p>Especialistas en importación a la carta desde Alemania a toda España.</p>
+                <p style="color: var(--primary-gold); margin-top: 0.8rem; font-style: italic;">"Importamos calidad, entregamos confianza"</p>
             </div>
             <div>
-                <h4>Menú</h4>
+                <h4>Navegación</h4>
                 <a onclick="navigateTo('inicio')">Inicio</a>
+                <a onclick="navigateTo('unidades')">Unidades Disponibles</a>
                 <a onclick="navigateTo('servicios')">Servicios</a>
-                <a onclick="navigateTo('proceso')">Proceso de Importación</a>
-                <a onclick="navigateTo('nosotros')">Sobre SF IMPORT</a>
+                <a onclick="navigateTo('proceso')">Proceso</a>
             </div>
             <div>
                 <h4>Contacto Directo</h4>
                 <a href="https://wa.me/34622940508" target="_blank">📱 WhatsApp: 622 940 508</a>
-                <a onclick="navigateTo('contacto')">📩 Formulario de Encargo</a>
-                <a onclick="navigateTo('faq')">❓ Preguntas Frecuentes</a>
+                <a onclick="navigateTo('contacto')">📩 Solicitud de Encargo</a>
             </div>
         </div>
         <div class="footer-bottom">
-            <p>© 2026 SF IMPORT - Importación vehicular en toda España.</p>
+            <p>© 2026 SF IMPORT - Importamos calidad, entregamos confianza.</p>
         </div>
     </footer>
 
-    <!-- WhatsApp Flotante Directo al 622940508 -->
-    <a href="https://wa.me/34622940508?text=Hola,%20me%20gustaría%20solicitar%20información%20sobre%20la%20importación%20de%20un%20vehículo%20con%20SF%20IMPORT." class="whatsapp-float" target="_blank">
-        💬 Contactar WhatsApp: 622 940 508
+    <!-- WhatsApp Flotante -->
+    <a href="https://wa.me/34622940508?text=Hola,%20quisiera%20consultar%20sobre%20un%20encargo%20de%20importaci%C3%B3n%20con%20SF%20IMPORT." class="whatsapp-float" target="_blank">
+        💬 WhatsApp Directo: 622 940 508
     </a>
 
-    <!-- Lógica JavaScript para cambio de páginas -->
+    <!-- Lógica de Navegación -->
     <script>
         function navigateTo(pageId) {
             const pages = document.querySelectorAll('.page');
