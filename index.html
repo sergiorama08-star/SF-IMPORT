@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SF IMPORT | Importación de Vehículos de Alemania a España</title>
+    <title>Lux Car Imports | Concesionario y Vehículos por Encargo</title>
     <style>
         :root {
             --primary: #121212;
@@ -39,17 +39,33 @@
         .btn-outline { background: transparent; color: var(--text-light); border: 2px solid var(--accent); }
         .btn-outline:hover { background: var(--accent); color: #000; }
 
+        /* Buscador / Filtro Interactivo */
+        .search-container { background: var(--secondary); color: white; padding: 2rem; border-radius: 8px; max-width: 1100px; margin: -3rem auto 3rem; position: relative; z-index: 10; box-shadow: 0 10px 25px rgba(0,0,0,0.4); border: 1px solid #333; }
+        .search-container h3 { color: var(--accent); margin-bottom: 1rem; font-size: 1.2rem; text-transform: uppercase; }
+        .search-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1rem; }
+        .search-grid select { padding: 0.8rem; border-radius: 4px; border: 1px solid #444; background: #2a2a2a; color: white; width: 100%; outline: none; }
+
         /* Section Layouts */
         section { padding: 4.5rem 1.5rem; max-width: 1200px; margin: 0 auto; }
         .section-title { text-align: center; font-size: 2.2rem; margin-bottom: 0.5rem; color: var(--primary); text-transform: uppercase; }
         .section-subtitle { text-align: center; color: var(--text-muted); margin-bottom: 3rem; font-size: 1.05rem; }
 
         .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; }
+        .grid-4 { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1.5rem; }
         .grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 2.5rem; align-items: center; }
 
         /* Cards & Features */
         .card { background: var(--light-bg); padding: 2rem; border-radius: 8px; border-top: 4px solid var(--accent); text-align: center; box-shadow: 0 2px 8px rgba(0,0,0,0.04); }
         .card h3 { margin-bottom: 0.8rem; color: var(--primary); }
+
+        /* Stock Cards */
+        .car-card { background: #fff; border: 1px solid var(--border); border-radius: 8px; overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.06); transition: transform 0.3s; }
+        .car-card:hover { transform: translateY(-5px); }
+        .car-img { width: 100%; height: 220px; background-size: cover; background-position: center; position: relative; }
+        .badge-stock { position: absolute; top: 10px; right: 10px; background: var(--accent); color: #000; font-weight: bold; padding: 0.3rem 0.6rem; border-radius: 4px; font-size: 0.8rem; }
+        .car-info { padding: 1.5rem; }
+        .car-price { font-size: 1.5rem; color: var(--accent); font-weight: bold; margin: 0.5rem 0; }
+        .car-details { font-size: 0.9rem; color: var(--text-muted); border-top: 1px solid #eee; padding-top: 0.8rem; margin-top: 0.8rem; }
 
         /* Encargo / Pedido Form */
         .encargo-box { background: var(--secondary); color: white; padding: 2.5rem; border-radius: 8px; text-align: center; }
@@ -84,7 +100,7 @@
 
         @media (max-width: 768px) {
             header { flex-direction: column; gap: 1rem; text-align: center; }
-            nav { flex-wrap: wrap; justify-content: center; }
+            nav { flex-wrap: wrap; justify-center; }
             .hero h1 { font-size: 2rem; }
         }
     </style>
@@ -93,9 +109,10 @@
 
     <!-- 1. Header con navegación completa -->
     <header>
-        <a href="#" class="logo">SF IMPORT</a>
+        <a href="#" class="logo">LUX CAR IMPORTS</a>
         <nav>
             <a href="#inicio">Inicio</a>
+            <a href="#stock">Vehículos de ocasión</a>
             <a href="#encargo">Vehículos por encargo</a>
             <a href="#servicios">Servicios</a>
             <a href="#nosotros">Conócenos</a>
@@ -107,201 +124,278 @@
 
     <!-- 2. Hero Principal -->
     <div class="hero" id="inicio">
-        <h1>Tu coche ideal, directamente desde Alemania</h1>
-        <p>Nos encargamos de buscar, verificar, importar y matricular el coche exacto que buscas en el mercado alemán. Entregas garantizadas en toda España.</p>
+        <h1>Encuentra el coche de tus SUEÑOS</h1>
+        <p>Mira el stock, pregunta lo que necesites y si buscas algo muy concreto, te lo conseguimos por encargo. Transparencia y buen rollo, pero con procesos serios.</p>
         <div>
-            <a href="#encargo" class="btn">Solicitar coche por encargo</a>
-            <a href="#servicios" class="btn btn-outline">Ver proceso de importación</a>
+            <a href="#stock" class="btn">Ver coches disponibles</a>
+            <a href="#encargo" class="btn btn-outline">Quiero uno por encargo</a>
         </div>
     </div>
 
-    <!-- 3. Puntos fuertes iniciales -->
+    <!-- 3. Buscador y Filtro interactivo de Stock -->
+    <div class="search-container">
+        <h3>Buscar coche perfecto</h3>
+        <div class="search-grid">
+            <select id="filter-marca" onchange="actualizarModelos()">
+                <option value="">Todas las marcas</option>
+                <option value="BMW">BMW</option>
+                <option value="Audi">Audi</option>
+                <option value="Mercedes-Benz">Mercedes-Benz</option>
+                <option value="Porsche">Porsche</option>
+            </select>
+            <select id="filter-modelo">
+                <option value="">Selecciona marca primero</option>
+            </select>
+            <select>
+                <option value="">Año desde</option>
+                <option>2023</option>
+                <option>2021</option>
+                <option>2019</option>
+                <option>2017</option>
+            </select>
+            <select>
+                <option value="">Combustible</option>
+                <option>Gasolina</option>
+                <option>Diésel</option>
+                <option>Híbrido / Eléctrico</option>
+            </select>
+            <button class="btn" style="width: 100%;" onclick="filtrarStock()">Buscar / Ver todo</button>
+        </div>
+    </div>
+
+    <!-- 4. Puntos fuertes iniciales -->
     <section>
         <div class="grid-3">
             <div class="card">
                 <h3>Respuesta Rápida</h3>
-                <p>Atención ágil para resolver tus dudas y buscar las mejores ofertas en el mercado alemán.</p>
+                <p>Atención ágil para resolver tus dudas y avanzar sin perder tiempo.</p>
             </div>
             <div class="card">
-                <h3>Revisión Completa en Origen</h3>
-                <p>Certificación mecánica e historial transparente y verificado antes de iniciar el transporte.</p>
+                <h3>Revisión Completa</h3>
+                <p>Certificación mecánica e historial transparente y verificado.</p>
             </div>
             <div class="card">
-                <h3>Entrega en Toda España</h3>
-                <p>Gestionamos el transporte seguro y te entregamos tu vehículo matriculado en cualquier punto del país.</p>
+                <h3>Financiación A Medida</h3>
+                <p>Propuestas de cuotas realistas y adaptadas a tu perfil en 24h.</p>
             </div>
         </div>
     </section>
 
-    <!-- 4. Presentación del servicio -->
+    <!-- 5. Presentación: Experiencia de Compra Premium -->
     <section style="background: var(--light-bg); max-width: 100%;">
         <div style="max-width: 1200px; margin: 0 auto;">
             <div class="grid-2">
                 <div>
-                    <h2 class="section-title" style="text-align: left;">Especialistas en importación</h2>
-                    <h3 style="color: var(--accent); margin-bottom: 1rem;">Tu partner de confianza para traer tu coche de Alemania</h3>
-                    <p style="margin-bottom: 1.5rem;">Nos dedicamos exclusivamente a realizar encargo directo de vehículos seleccionados desde Alemania hacia España. Cuidamos cada detalle técnico y legal para darte total tranquilidad.</p>
+                    <h2 class="section-title" style="text-align: left;">Experiencia de compra premium</h2>
+                    <h3 style="color: var(--accent); margin-bottom: 1rem;">Más que un concesionario, tu partner de confianza</h3>
+                    <p style="margin-bottom: 1.5rem;">Nos dedicamos a seleccionar los mejores vehículos para ti. Cada coche pasa por un riguroso proceso de revisión y certificación para asegurar que solo te llevas lo mejor.</p>
                     <ul style="list-style: none; line-height: 2;">
-                        <li>✔️ Búsqueda a la carta según tus especificaciones</li>
-                        <li>✔️ Certificación mecánica e inspección en origen</li>
+                        <li>✔️ Certificación mecánica completa de 150 puntos</li>
                         <li>✔️ Historial de mantenimiento transparente y verificado</li>
-                        <li>✔️ Gestión integral de homologación, matriculación y transporte</li>
+                        <li>✔️ Garantía premium incluida en todos los vehículos</li>
+                        <li>✔️ Gestión integral de documentación y trámites</li>
                     </ul>
                     <br>
-                    <a href="#encargo" class="btn">Pedir presupuesto sin compromiso</a>
+                    <a href="#stock" class="btn">Ver coches en stock</a>
                 </div>
                 <div>
-                    <img src="https://images.unsplash.com/photo-1563720223185-11003d516935?auto=format&fit=crop&w=800&q=80" alt="Coche de importación" style="width: 100%; border-radius: 8px; box-shadow: 0 10px 20px rgba(0,0,0,0.15);">
+                    <img src="https://images.unsplash.com/photo-1563720223185-11003d516935?auto=format&fit=crop&w=800&q=80" alt="Coche de lujo" style="width: 100%; border-radius: 8px; box-shadow: 0 10px 20px rgba(0,0,0,0.15);">
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- 5. Sección de Importación por Encargo -->
+    <!-- 6. Catálogo / Stock Destacado -->
+    <section id="stock">
+        <h2 class="section-title">Stock Destacado</h2>
+        <p class="section-subtitle">Una selección de nuestras mejores oportunidades actuales.</p>
+        <div class="grid-3" id="stock-grid">
+            <div class="car-card" data-marca="BMW">
+                <div class="car-img" style="background-image: url('https://images.unsplash.com/photo-1555215695-3004980ad54e?auto=format&fit=crop&w=600&q=80');">
+                    <span class="badge-stock">Disponible</span>
+                </div>
+                <div class="car-info">
+                    <h3>BMW Serie 4 Gran Coupé</h3>
+                    <p class="car-price">34.900 €</p>
+                    <p class="car-details">2021 | 65.000 km | Diésel | Automático</p>
+                </div>
+            </div>
+            <div class="car-card" data-marca="Audi">
+                <div class="car-img" style="background-image: url('https://images.unsplash.com/photo-1603584173870-7f23fdae1b7a?auto=format&fit=crop&w=600&q=80');">
+                    <span class="badge-stock">Disponible</span>
+                </div>
+                <div class="car-info">
+                    <h3>Audi A5 Sportback S-Line</h3>
+                    <p class="car-price">32.500 €</p>
+                    <p class="car-details">2020 | 72.000 km | Gasolina | Automático</p>
+                </div>
+            </div>
+            <div class="car-card" data-marca="Mercedes-Benz">
+                <div class="car-img" style="background-image: url('https://images.unsplash.com/photo-1618843479313-40f8afb4b4d8?auto=format&fit=crop&w=600&q=80');">
+                    <span class="badge-stock">Disponible</span>
+                </div>
+                <div class="car-info">
+                    <h3>Mercedes-Benz Clase C AMG</h3>
+                    <p class="car-price">38.000 €</p>
+                    <p class="car-details">2022 | 45.000 km | Híbrido | Automático</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 7. ¿No ves lo que buscas? / Sección de Importación por Encargo -->
     <section id="encargo">
         <div class="encargo-box">
-            <h2 style="color: var(--accent); margin-bottom: 0.5rem;">¿Qué vehículo estás buscando?</h2>
-            <p>Dinos modelo, presupuesto aproximado y preferencias. Buscaremos las mejores unidades disponibles en Alemania para ti.</p>
+            <h2 style="color: var(--accent); margin-bottom: 0.5rem;">¿No ves lo que buscas?</h2>
+            <p>Dinos modelo, presupuesto y preferencias. Te avisamos cuando encontremos algo que encaje perfectamente contigo.</p>
             <form class="encargo-form" onsubmit="event.preventDefault(); alert('Solicitud enviada correctamente. Te contactaremos en breve.');">
-                <input type="text" placeholder="Modelo deseado (ej. BMW Serie 4, Audi A5...)" required>
+                <input type="text" placeholder="Modelo deseado (ej. Porsche Macan)" required>
                 <input type="text" placeholder="Presupuesto aprox. (€)" required>
                 <input type="text" placeholder="Tu Teléfono / WhatsApp" required>
-                <textarea placeholder="Comentarios adicionales (año mínimo, equipamiento, kilómetros máximos...)"></textarea>
-                <button type="submit" class="btn" style="grid-column: 1 / -1;">Pedir Búsqueda por Encargo</button>
+                <textarea placeholder="Comentarios adicionales (color, año mínimo, equipamiento...)"></textarea>
+                <button type="submit" class="btn" style="grid-column: 1 / -1;">Pedir Búsqueda / Encargar Coche</button>
             </form>
         </div>
     </section>
 
-    <!-- 6. Servicios de Importación -->
+    <!-- 8. Todos los Servicios (6 Bloques completados) -->
     <section id="servicios">
         <h2 class="section-title">Lo hacemos fácil (de verdad)</h2>
-        <p class="section-subtitle">Servicios pensados para que importes tu próximo coche con total tranquilidad y transparencia.</p>
+        <p class="section-subtitle">Servicios pensados para que compres o vendas con total tranquilidad y transparencia.</p>
         <div class="grid-3">
             <div class="card">
-                <h3>Búsqueda a medida</h3>
-                <p>Localizamos unidades exactas en la red de concesionarios oficiales y vendedores verificados en Alemania.</p>
+                <h3>Coches revisados</h3>
+                <p>Antes de publicarlos, hacemos un riguroso control mecánico, estético y documental.</p>
             </div>
             <div class="card">
-                <h3>Verificación documental y técnica</h3>
-                <p>Revisamos detalladamente el historial, libro de mantenimiento y estado del vehículo antes de la compra.</p>
+                <h3>Financiación fácil</h3>
+                <p>Te proponemos cuotas realistas según tu caso y gestionamos todo de manera rápida.</p>
             </div>
             <div class="card">
-                <h3>Transporte a España</h3>
-                <p>Organizamos el traslado seguro del vehículo en camión porta-coches adaptado hasta España.</p>
+                <h3>Entrega cómoda</h3>
+                <p>Recógelo directamente en nuestras instalaciones o te lo llevamos a la puerta de tu casa.</p>
             </div>
             <div class="card">
-                <h3>Matriculación e ITV</h3>
-                <p>Nos encargamos de las homologaciones, paso de la ITV de importación y tramitación de placas españolas.</p>
+                <h3>Importación / Por encargo</h3>
+                <p>Si no lo tenemos en stock, lo buscamos en el mercado europeo y lo traemos con todo incluido.</p>
             </div>
             <div class="card">
                 <h3>Garantía Premium</h3>
-                <p>Opciones de cobertura de garantía para conducir tu coche importado sin ninguna preocupación.</p>
+                <p>Opciones de garantía total de 12 meses ampliable para conducir sin preocupaciones.</p>
             </div>
             <div class="card">
-                <h3>Entrega a Domicilio</h3>
-                <p>Hacemos entregas a toda España, directamente en la puerta de tu casa o donde nos indiques.</p>
+                <h3>Acompañamiento real</h3>
+                <p>Te explicamos cada trámite administrativo, matriculación e impuestos sin prisas ni sorpresas.</p>
             </div>
         </div>
     </section>
 
-    <!-- 7. Testimonios -->
+    <!-- 9. Testimonios y Reseñas de Wallapop -->
     <section style="background: var(--light-bg); max-width: 100%;">
         <div style="max-width: 1200px; margin: 0 auto;">
             <h2 class="section-title">Lo que dicen de nosotros</h2>
-            <p class="section-subtitle">La satisfacción de nuestros clientes al recibir su coche es nuestra mejor garantía.</p>
+            <p class="section-subtitle">La satisfacción de nuestros clientes es nuestra mejor carta de presentación.</p>
             <div class="grid-3">
                 <div class="testimonial-card">
                     <p>"Atención inmejorable. Encargué un coche de Alemania y se ocuparon de absolutamente todo hasta dármelo matriculado."</p>
-                    <div class="testimonial-source">★ ★ ★ ★ ★ - Cliente Satisfecho</div>
+                    <div class="testimonial-source">★ ★ ★ ★ ★ - Reseña en Wallapop</div>
                 </div>
                 <div class="testimonial-card">
                     <p>"Súper transparentes con el historial del vehículo y el proceso de compra. Da gusto dar con profesionales así."</p>
                     <div class="testimonial-source">★ ★ ★ ★ ★ - Cliente Verificado</div>
                 </div>
                 <div class="testimonial-card">
-                    <p>"Todo rápido y sin mareos. La entrega fue perfecta y el estado del coche tal cual lo explicaron."</p>
-                    <div class="testimonial-source">★ ★ ★ ★ ★ - Reseña de Cliente</div>
+                    <p>"Todo rápido y sin mareos. Tasaron mi coche actual y me gestionaron la entrega del nuevo sin moverme de casa."</p>
+                    <div class="testimonial-source">★ ★ ★ ★ ★ - Reseña en Wallapop</div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- 8. Conócenos / Equipo -->
+    <!-- 10. Conócenos / Equipo -->
     <section id="nosotros">
         <h2 class="section-title">Pasión por el motor, compromiso contigo</h2>
         <p style="text-align: center; max-width: 800px; margin: 0 auto 1.5rem; color: var(--text-muted);">
-            En SF IMPORT somos especialistas en la gestión e importación de vehículos alemanes por encargo. Trabajamos de forma directa para garantizar un servicio transparente, cercano y ágil, adaptado exactamente a tus necesidades y entregando en toda España.
+            En Lux Car Imports no solo vendemos coches, cumplimos sueños. Nuestro equipo de expertos trabaja incansablemente para ofrecerte una experiencia transparente y personalizada. Con años de experiencia en el sector, conocemos cada detalle que hace a un coche especial.
         </p>
     </section>
 
-    <!-- 9. Blog y Consejos Útiles -->
+    <!-- 11. Blog y Consejos Utiles -->
     <section id="blog">
         <h2 class="section-title">Blog y Noticias</h2>
-        <p class="section-subtitle">Guías y consejos clave para entender el proceso de importación.</p>
+        <p class="section-subtitle">Guías, comparativas y consejos útiles para elegir mejor tu próximo coche.</p>
         <div class="grid-3">
             <div class="blog-card">
                 <div class="blog-content">
                     <h3>¿Por qué importar un coche de Alemania?</h3>
-                    <p>Analizamos las diferencias de equipamiento, mantenimiento y catálogo frente al mercado nacional.</p>
+                    <p>Analizamos las diferencias de equipamiento, estado de conservación y precios frente al mercado nacional.</p>
                     <a href="#" class="blog-link" onclick="alert('Leyendo artículo...'); return false;">Leer artículo →</a>
                 </div>
             </div>
             <div class="blog-card">
                 <div class="blog-content">
-                    <h3>Documentación clave al importar</h3>
-                    <p>Todo lo necesario sobre la ficha reducida, certificado COC y trámites de ITV de importación.</p>
+                    <h3>Documentación clave al comprar de ocasión</h3>
+                    <p>Todo lo que debes comprobar en el permiso de circulación, ITV y ficha técnica antes de dar el paso.</p>
                     <a href="#" class="blog-link" onclick="alert('Leyendo artículo...'); return false;">Leer artículo →</a>
                 </div>
             </div>
             <div class="blog-card">
                 <div class="blog-content">
                     <h3>Cómo calcular el Impuesto de Matriculación</h3>
-                    <p>Explicamos cómo influyen los tramos de emisiones de CO2 al matricular un coche importado.</p>
+                    <p>Explicamos los tramos de emisiones de CO2 para que sepas exactamente cuánto paga cada vehículo.</p>
                     <a href="#" class="blog-link" onclick="alert('Leyendo artículo...'); return false;">Leer artículo →</a>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- 10. Preguntas Frecuentes (FAQ) -->
+    <!-- 12. Preguntas Frecuentes (FAQ completa) -->
     <section id="faq">
         <h2 class="section-title">Preguntas Frecuentes</h2>
-        <p class="section-subtitle">Resolvemos tus dudas sobre el proceso de importación por encargo.</p>
+        <p class="section-subtitle">Resolvemos tus dudas de forma rápida y clara.</p>
         <div style="max-width: 900px; margin: 0 auto;">
             <div class="faq-item">
-                <h3>¿Cuánto tarda el proceso de importación desde Alemania?</h3>
-                <p>El proceso completo, desde la reserva y verificación en Alemania hasta la matriculación y entrega en España, suele demorarse entre 2 y 3 semanas aproximadamente.</p>
+                <h3>¿Qué documentos necesito para financiar?</h3>
+                <p>Normalmente basta con tu DNI/NIE, última nómina y un recibo bancario donde aparezca tu IBAN. El proceso es rápido y te daremos respuesta en menos de 24 horas.</p>
             </div>
             <div class="faq-item">
-                <h3>¿Los vehículos tienen garantía?</h3>
-                <p>Sí, gestionamos opciones de garantía premium con cobertura nacional para que conduzcas tu coche importado con total tranquilidad.</p>
+                <h3>¿Los coches tienen garantía?</h3>
+                <p>Sí, todos nuestros vehículos incluyen una garantía premium de 12 meses ampliable. La cobertura es a nivel nacional y gestionamos todo directamente nosotros.</p>
             </div>
             <div class="faq-item">
-                <h3>¿Entregáis en cualquier punto de España?</h3>
-                <p>Sí, realizamos envíos y entregas directas a toda la península. Consultamos la logística y te lo llevamos donde nos indiques.</p>
+                <h3>¿Aceptáis mi coche como parte de pago?</h3>
+                <p>¡Claro! Tasamos tu vehículo actual de forma justa y profesional. El valor se descuenta directamente del precio del nuevo coche que elijas.</p>
+            </div>
+            <div class="faq-item">
+                <h3>¿Hacéis envíos a toda España?</h3>
+                <p>Sí, entregamos vehículos en cualquier punto de la península. Consulta nuestras tarifas de transporte según tu ubicación.</p>
             </div>
         </div>
     </section>
 
-    <!-- 11. Datos de Contacto Directo -->
+    <!-- 13. Datos de Contacto Directo -->
     <section id="contacto">
         <div style="background: var(--primary); color: white; padding: 3rem 2rem; border-radius: 8px; text-align: center; border-bottom: 4px solid var(--accent);">
-            <h2 style="color: var(--accent); margin-bottom: 1rem;">SF IMPORT</h2>
-            <p style="margin-bottom: 1.5rem;">Importación de vehículos desde Alemania hacia toda España.</p>
-            <p><strong>Teléfono / WhatsApp:</strong> Contacta con nosotros para tu encargo</p>
-            <p><strong>Email:</strong> info@sfimport.com</p>
+            <h2 style="color: var(--accent); margin-bottom: 1rem;">Lux Car Imports</h2>
+            <p style="margin-bottom: 1.5rem;">Especialistas en importación y venta de vehículos.</p>
+            <p><strong>Teléfono / WhatsApp:</strong> 620 484 328</p>
+            <p><strong>Email:</strong> Gerente@luxcarimports.com</p>
+            <p><strong>Ubicación:</strong> C/ Ancha, 6 - San Clemente, Cuenca, 16600</p>
         </div>
     </section>
 
-    <!-- 12. Footer Completo -->
+    <!-- 14. Footer Completo con Navegación, Legal y Redes -->
     <footer>
         <div class="footer-grid">
             <div>
-                <h4 style="color: var(--accent);">SF IMPORT</h4>
-                <p>Especialistas en importación de vehículos de Alemania por encargo directo. Entregas en toda España.</p>
+                <h4 style="color: var(--accent);">Lux Car Imports</h4>
+                <p>Especialistas en importación de vehículos de ocasión y encargos a la carta.</p>
+                <br>
+                <p>📍 C/ Ancha, 6 - San Clemente, Cuenca (16600)</p>
             </div>
             <div>
                 <h4>Navegación</h4>
+                <a href="#stock">Vehículos de ocasión</a>
                 <a href="#encargo">Vehículos por encargo</a>
                 <a href="#servicios">Servicios</a>
                 <a href="#blog">Blog</a>
@@ -319,17 +413,55 @@
                 <a href="#">Instagram</a>
                 <a href="#">Facebook</a>
                 <a href="#">TikTok</a>
+                <a href="#">YouTube</a>
             </div>
         </div>
         <div class="footer-bottom">
-            <p>© 2026 SF IMPORT. Todos los derechos reservados. | Importación de vehículos de Alemania a España.</p>
+            <p>© 2026 Lux Car Imports. Todos los derechos reservados. | Gestión de venta profesional.</p>
         </div>
     </footer>
 
-    <!-- 13. Botón Flotante para WhatsApp Directo -->
-    <a href="https://wa.me/" class="whatsapp-float" target="_blank">
+    <!-- 15. Botón Flotante para WhatsApp Directo -->
+    <a href="https://wa.me/34620484328" class="whatsapp-float" target="_blank">
         💬 Contactar por WhatsApp
     </a>
 
+    <!-- Script de interacción simple para Filtros -->
+    <script>
+        const modelosPorMarca = {
+            'BMW': ['Serie 1', 'Serie 3', 'Serie 4 Gran Coupé', 'X3', 'X5'],
+            'Audi': ['A3', 'A4', 'A5 Sportback', 'Q3', 'Q5'],
+            'Mercedes-Benz': ['Clase A', 'Clase C AMG', 'Clase E', 'GLC'],
+            'Porsche': ['911', 'Macan', 'Cayenne', 'Panamera']
+        };
+
+        function actualizarModelos() {
+            const marca = document.getElementById('filter-marca').value;
+            const selectModelo = document.getElementById('filter-modelo');
+            selectModelo.innerHTML = '<option value="">Todos los modelos</option>';
+
+            if (marca && modelosPorMarca[marca]) {
+                modelosPorMarca[marca].forEach(modelo => {
+                    const opt = document.createElement('option');
+                    opt.value = modelo;
+                    opt.textContent = modelo;
+                    selectModelo.appendChild(opt);
+                });
+            }
+        }
+
+        function filtrarStock() {
+            const marca = document.getElementById('filter-marca').value;
+            const cards = document.querySelectorAll('#stock-grid .car-card');
+            
+            cards.forEach(card => {
+                if (!marca || card.dataset.marca === marca) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+    </script>
 </body>
 </html>
