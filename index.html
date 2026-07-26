@@ -72,9 +72,11 @@
         .car-img-box img { width: 100%; height: 100%; object-fit: cover; }
         .car-badge { position: absolute; top: 12px; right: 12px; background: var(--primary-gold); color: #000; padding: 4px 12px; font-weight: 800; font-size: 0.75rem; border-radius: 4px; text-transform: uppercase; letter-spacing: 0.5px; }
         .car-body { padding: 1.8rem; display: flex; flex-direction: column; flex-grow: 1; }
-        .car-title { font-size: 1.25rem; color: #fff; margin-bottom: 0.4rem; font-weight: 700; height: 3rem; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+        .car-title { font-size: 1.3rem; color: #fff; margin-bottom: 0.4rem; font-weight: 700; }
         .car-price { font-size: 1.5rem; color: var(--primary-gold); font-weight: 800; margin-bottom: 1rem; }
         .car-specs { display: grid; grid-template-columns: 1fr 1fr; gap: 0.6rem; font-size: 0.85rem; color: var(--silver); margin-bottom: 1.2rem; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 1rem; }
+        .car-features-list { font-size: 0.83rem; color: var(--text-dark); margin-bottom: 1.5rem; padding-left: 1.2rem; }
+        .car-features-list li { margin-bottom: 0.3rem; }
 
         .form-box { background: var(--bg-card); color: white; padding: 2.5rem; border-radius: 8px; border: 1px solid var(--border-gold); max-width: 800px; margin: 0 auto; box-shadow: 0 8px 30px rgba(0,0,0,0.5); }
         .form-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1.2rem; margin-top: 1.5rem; }
@@ -108,7 +110,6 @@
 </head>
 <body>
 
-    <!-- Header -->
     <header>
         <a class="logo-container" onclick="navigateTo('inicio')">
             <img src="logo.png" alt="SF IMPORT Logo" class="logo-img" onerror="this.style.display='none'">
@@ -128,13 +129,12 @@
         </nav>
     </header>
 
-    <!-- INICIO -->
     <div id="page-inicio" class="page active-page">
         <div class="hero">
             <h1>Importación Directa <span>desde Alemania a España</span></h1>
             <p>Especialistas en la localización, auditoría técnica, transporte seguro y matriculación de vehículos a la carta para clientes en toda España.</p>
             <div>
-                <a onclick="navigateTo('unidades')" class="btn">Ver Unidades Disponibles</a>
+                <a onclick="navigateTo('unidades')" class="btn">Ver Unidades y Catálogo</a>
                 <a onclick="navigateTo('contacto')" class="btn btn-outline">Solicitar Encargo</a>
             </div>
         </div>
@@ -159,144 +159,178 @@
         </section>
     </div>
 
-    <!-- UNIDADES DISPONIBLES -->
     <div id="page-unidades" class="page">
         <div class="page-header">
             <h1>Unidades Disponibles</h1>
-            <p>Catálogo actualizado de vehículos importados y disponibles para entrega o encargo.</p>
+            <p>Catálogo actualizado con especificaciones detalladas de nuestros vehículos de importación.</p>
         </div>
         <section>
             <div class="grid-3">
 
-                <!-- Coche 1 -->
                 <div class="car-card">
                     <div class="car-img-box">
-                        <img src="coche1.jpg" alt="VOLKSWAGEN GOLF GTI 2.0 TSI" onerror="this.src='https://images.unsplash.com/photo-1541899481282-d53bffe3c35d?auto=format&fit=crop&w=800&q=80'">
+                        <img src="coche1.jpg" alt="Volkswagen Golf GTI" onerror="this.src='https://images.unsplash.com/photo-1541899481282-d53bffe3c35d?auto=format&fit=crop&w=800&q=80'">
                         <span class="car-badge">Disponible</span>
                     </div>
                     <div class="car-body">
-                        <div class="car-title">VOLKSWAGEN GOLF GTI 2.0 TSI 245 CV</div>
+                        <div class="car-title">VOLKSWAGEN GOLF GTI 2.0 TSI</div>
                         <div class="car-price">27.500 €</div>
                         <div class="car-specs">
                             <span>📅 Año: 2023</span>
+                            <span>⚡ Potencia: 245 CV</span>
                             <span>⛽ Gasolina</span>
                             <span>🛣️ 34.900 km</span>
-                            <span>⚙️ Manual</span>
+                            <span>⚙️ Cambio: Manual</span>
                         </div>
+                        <ul class="car-features-list">
+                            <li><strong>Exterior:</strong> Faros LED Plus, llantas de aleación, paquete deportivo GTI y cristales tintados.</li>
+                            <li><strong>Interior:</strong> Asientos deportivos Scale Paper, Digital Cockpit e iluminación ambiental configurable.</li>
+                            <li><strong>Tecnología:</strong> Sistema Ready 2 Discover, integración Apple CarPlay y Android Auto sin cables.</li>
+                        </ul>
                         <a href="https://wa.me/34622940508?text=Hola,%20me%20interesa%20obtener%20informaci%C3%B3n%20sobre%20el%20VOLKSWAGEN%20GOLF%20GTI%202.0%20TSI%20245%20CV" target="_blank" class="btn" style="margin-top: auto;">Consultar por WhatsApp</a>
                     </div>
                 </div>
 
-                <!-- Coche 2 -->
                 <div class="car-card">
                     <div class="car-img-box">
-                        <img src="coche2.jpg" alt="CUPRA ATECA 2.0 TSI" onerror="this.src='https://images.unsplash.com/photo-1542282088-72c9c27ed0cd?auto=format&fit=crop&w=800&q=80'">
+                        <img src="coche2.jpg" alt="Cupra Ateca" onerror="this.src='https://images.unsplash.com/photo-1542282088-72c9c27ed0cd?auto=format&fit=crop&w=800&q=80'">
                         <span class="car-badge">Disponible</span>
                     </div>
                     <div class="car-body">
-                        <div class="car-title">CUPRA ATECA 2.0 TSI 300CV 4Drive DSG</div>
+                        <div class="car-title">CUPRA ATECA 2.0 TSI 4Drive</div>
                         <div class="car-price">28.990 €</div>
                         <div class="car-specs">
                             <span>📅 Año: 2022</span>
+                            <span>⚡ Potencia: 300 CV</span>
                             <span>⛽ Gasolina</span>
                             <span>🛣️ 62.000 km</span>
-                            <span>⚙️ Automático</span>
+                            <span>⚙️ Automático DSG</span>
                         </div>
+                        <ul class="car-features-list">
+                            <li><strong>Prestaciones:</strong> Tracción total 4Drive, selector de modos de conducción Cupra y suspensión adaptativa.</li>
+                            <li><strong>Equipamiento:</strong> Faros Full LED, tubo de escape deportivo, asientos bucket deportivos y Digital Cockpit.</li>
+                            <li><strong>Confort:</strong> Cámara 360°, asistente de aparcamiento y portón trasero eléctrico.</li>
+                        </ul>
                         <a href="https://wa.me/34622940508?text=Hola,%20me%20interesa%20obtener%20informaci%C3%B3n%20sobre%20el%20CUPRA%20ATECA%20300CV" target="_blank" class="btn" style="margin-top: auto;">Consultar por WhatsApp</a>
                     </div>
                 </div>
 
-                <!-- Coche 3 -->
                 <div class="car-card">
                     <div class="car-img-box">
-                        <img src="coche3.jpg" alt="Volkswagen Golf VII GTI TCR" onerror="this.src='https://images.unsplash.com/photo-1552519507-da3b142c6e3d?auto=format&fit=crop&w=800&q=80'">
-                        <span class="car-badge">Disponible</span>
+                        <img src="coche3.jpg" alt="Golf VII GTI TCR" onerror="this.src='https://images.unsplash.com/photo-1552519507-da3b142c6e3d?auto=format&fit=crop&w=800&q=80'">
+                        <span class="car-badge">Edición Exclusiva</span>
                     </div>
                     <div class="car-body">
-                        <div class="car-title">Volkswagen Golf VII GTI TCR 2.0 TSI 290CV</div>
+                        <div class="car-title">Volkswagen Golf VII GTI TCR 2.0 TSI</div>
                         <div class="car-price">28.300 €</div>
                         <div class="car-specs">
                             <span>📅 Año: 2019</span>
+                            <span>⚡ Potencia: 290 CV</span>
                             <span>⛽ Gasolina</span>
                             <span>🛣️ 99.990 km</span>
-                            <span>⚙️ Automático</span>
+                            <span>⚙️ Automático DSG</span>
                         </div>
+                        <ul class="car-features-list">
+                            <li><strong>Edición Especial TCR:</strong> Kit aerodinámico exclusivo, difusor trasero TCR y vinilos laterales.</li>
+                            <li><strong>Rendimiento:</strong> Bloqueo de diferencial delantero, frenos de alto rendimiento y escape deportivo.</li>
+                            <li><strong>Interior:</strong> Volante deportivo en microfibra con marca a las 12, tapicería exclusiva TCR y Virtual Cockpit.</li>
+                        </ul>
                         <a href="https://wa.me/34622940508?text=Hola,%20me%20interesa%20obtener%20informaci%C3%B3n%20sobre%20el%20Golf%20GTI%20TCR" target="_blank" class="btn" style="margin-top: auto;">Consultar por WhatsApp</a>
                     </div>
                 </div>
 
-                <!-- Coche 4 -->
                 <div class="car-card">
                     <div class="car-img-box">
-                        <img src="coche4.jpg" alt="Audi A3 40 TFSI S-Tronic" onerror="this.src='https://images.unsplash.com/photo-1603584173870-7f23fdae1b7a?auto=format&fit=crop&w=800&q=80'">
+                        <img src="coche4.jpg" alt="Audi A3 40 TFSI" onerror="this.src='https://images.unsplash.com/photo-1603584173870-7f23fdae1b7a?auto=format&fit=crop&w=800&q=80'">
                         <span class="car-badge">Disponible</span>
                     </div>
                     <div class="car-body">
-                        <div class="car-title">Audi A3 40 TFSI S-Tronic 180 CV Panorámico</div>
+                        <div class="car-title">Audi A3 40 TFSI S-Tronic</div>
                         <div class="car-price">22.990 €</div>
                         <div class="car-specs">
                             <span>📅 Año: 2018</span>
+                            <span>⚡ Potencia: 180 CV</span>
                             <span>⛽ Gasolina</span>
                             <span>🛣️ 45.000 km</span>
-                            <span>⚙️ Automático</span>
+                            <span>⚙️ Automático S-Tronic</span>
                         </div>
+                        <ul class="car-features-list">
+                            <li><strong>Destacados:</strong> Techo solar panorámico practicable, faros LED y paquete exterior deportivo.</li>
+                            <li><strong>Multimedia:</strong> Navegación MMI Plus con MMI Touch, Virtual Cockpit y sistema de sonido premium.</li>
+                            <li><strong>Estado:</strong> Kilometraje certificado en origen con historial de mantenimiento oficial.</li>
+                        </ul>
                         <a href="https://wa.me/34622940508?text=Hola,%20me%20interesa%20obtener%20informaci%C3%B3n%20sobre%20el%20Audi%20A3%2040%20TFSI" target="_blank" class="btn" style="margin-top: auto;">Consultar por WhatsApp</a>
                     </div>
                 </div>
 
-                <!-- Coche 5 -->
                 <div class="car-card">
                     <div class="car-img-box">
                         <img src="coche5.jpg" alt="Audi Q2 1.6 TDI" onerror="this.src='https://images.unsplash.com/photo-1541899481282-d53bffe3c35d?auto=format&fit=crop&w=800&q=80'">
                         <span class="car-badge">Disponible</span>
                     </div>
                     <div class="car-body">
-                        <div class="car-title">Audi Q2 1.6 TDI 116 CV S tronic Business</div>
+                        <div class="car-title">Audi Q2 1.6 TDI Business</div>
                         <div class="car-price">15.990 €</div>
                         <div class="car-specs">
                             <span>📅 Año: 2017</span>
+                            <span>⚡ Potencia: 116 CV</span>
                             <span>⛽ Diésel</span>
                             <span>🛣️ 170.000 km</span>
-                            <span>⚙️ Automático</span>
+                            <span>⚙️ Automático S tronic</span>
                         </div>
+                        <ul class="car-features-list">
+                            <li><strong>Línea Business:</strong> Control de crucero adaptativo, sensores de aparcamiento y climatizador bizona.</li>
+                            <li><strong>Eficiencia:</strong> Consumos mínimos en carretera gracias a su motorización 1.6 TDI diésel Euro 6.</li>
+                            <li><strong>Seguridad:</strong> Audi Pre Sense Front, sensores de lluvia y luces automáticas.</li>
+                        </ul>
                         <a href="https://wa.me/34622940508?text=Hola,%20me%20interesa%20obtener%20informaci%C3%B3n%20sobre%20el%20Audi%20Q2" target="_blank" class="btn" style="margin-top: auto;">Consultar por WhatsApp</a>
                     </div>
                 </div>
 
-                <!-- Coche 6 -->
                 <div class="car-card">
                     <div class="car-img-box">
                         <img src="coche6.jpg" alt="Mercedes-Benz A 250" onerror="this.src='https://images.unsplash.com/photo-1618843479313-40f8afb4b4d8?auto=format&fit=crop&w=800&q=80'">
-                        <span class="car-badge">Disponible</span>
+                        <span class="car-badge">AMG Line</span>
                     </div>
                     <div class="car-body">
-                        <div class="car-title">Mercedes-Benz A 250 224CV 4Matic AMG Line</div>
+                        <div class="car-title">Mercedes-Benz A 250 4Matic AMG Line</div>
                         <div class="car-price">25.490 €</div>
                         <div class="car-specs">
                             <span>📅 Año: 2019</span>
+                            <span>⚡ Potencia: 224 CV</span>
                             <span>⛽ Gasolina</span>
                             <span>🛣️ 104.562 km</span>
-                            <span>⚙️ Automático</span>
+                            <span>⚙️ Automático 4Matic</span>
                         </div>
+                        <ul class="car-features-list">
+                            <li><strong>Paquete AMG Line:</strong> Llantas AMG, paragolpes deportivos, calandra de efecto diamante y volante achatado.</li>
+                            <li><strong>Techo Panorámico:</strong> Techo de cristal corredizo y sistema MBUX con doble pantalla panorámica.</li>
+                            <li><strong>Seguridad:</strong> Tracción integral 4Matic, asistente de carril y faros High Performance LED.</li>
+                        </ul>
                         <a href="https://wa.me/34622940508?text=Hola,%20me%20interesa%20obtener%20informaci%C3%B3n%20sobre%20el%20Mercedes-Benz%20A%20250" target="_blank" class="btn" style="margin-top: auto;">Consultar por WhatsApp</a>
                     </div>
                 </div>
 
-                <!-- Coche 7 -->
                 <div class="car-card">
                     <div class="car-img-box">
                         <img src="coche7.jpg" alt="BMW 320 Touring M Sport" onerror="this.src='https://images.unsplash.com/photo-1555215695-3004980ad54e?auto=format&fit=crop&w=800&q=80'">
-                        <span class="car-badge">Disponible</span>
+                        <span class="car-badge">M Sport Shadow</span>
                     </div>
                     <div class="car-body">
-                        <div class="car-title">BMW 320 Touring M Sport Shadow LED 8G</div>
+                        <div class="car-title">BMW 320d Touring M Sport Shadow</div>
                         <div class="car-price">20.700 €</div>
                         <div class="car-specs">
                             <span>📅 Año: 2022</span>
-                            <span>⛽ Diésel</span>
+                            <span>⚡ Potencia: 190 CV</span>
+                            <span>⛽ Diésel Mild-Hybrid</span>
                             <span>🛣️ 140.000 km</span>
-                            <span>⚙️ Automático</span>
+                            <span>⚙️ Automático 8v</span>
                         </div>
+                        <ul class="car-features-list">
+                            <li><strong>Acabado M Sport Shadow Line:</strong> Molduras exteriores en negro brillo, paquete M aerodinámico y faros LED ampliados.</li>
+                            <li><strong>Tecnología:</strong> BMW Live Cockpit Professional, integración completa de smartphone y modos de conducción.</li>
+                            <li><strong>Eliqueta ECO:</strong> Tecnología Mild-Hybrid (MHEV) de 48V para acceso sin restricciones a zonas ZBE.</li>
+                        </ul>
                         <a href="https://wa.me/34622940508?text=Hola,%20me%20interesa%20obtener%20informaci%C3%B3n%20sobre%20el%20BMW%20320%20Touring" target="_blank" class="btn" style="margin-top: auto;">Consultar por WhatsApp</a>
                     </div>
                 </div>
@@ -305,7 +339,6 @@
         </section>
     </div>
 
-    <!-- SERVICIOS -->
     <div id="page-servicios" class="page">
         <div class="page-header">
             <h1>Servicios Exclusivos de Importación</h1>
@@ -329,7 +362,6 @@
         </section>
     </div>
 
-    <!-- PROCESO -->
     <div id="page-proceso" class="page">
         <div class="page-header">
             <h1>Proceso de Encargo Paso a Paso</h1>
@@ -359,7 +391,6 @@
         </section>
     </div>
 
-    <!-- SOBRE NOSOTROS -->
     <div id="page-nosotros" class="page">
         <div class="page-header">
             <h1>Sobre SF IMPORT</h1>
@@ -378,7 +409,6 @@
         </section>
     </div>
 
-    <!-- FAQ -->
     <div id="page-faq" class="page">
         <div class="page-header">
             <h1>Preguntas Frecuentes</h1>
@@ -396,7 +426,6 @@
         </section>
     </div>
 
-    <!-- CONTACTO -->
     <div id="page-contacto" class="page">
         <div class="page-header">
             <h1>Solicitar Encargo de Vehículo</h1>
@@ -422,7 +451,6 @@
         </section>
     </div>
 
-    <!-- Footer -->
     <footer>
         <div class="footer-grid">
             <div>
