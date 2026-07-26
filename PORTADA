@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Importa Mi Coche | Sergio - Importador Certificado en Galicia</title>
+    <style>
+        :root {
+            --primary: #0f172a;
+            --secondary: #1e293b;
+            --accent: #2563eb;
+            --accent-hover: #1d4ed8;
+            --light-bg: #f8fafc;
+            --text-dark: #1e293b;
+            --text-muted: #64748b;
+            --text-light: #ffffff;
+            --border: #e2e8f0;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; }
+        body { color: var(--text-dark); line-height: 1.6; background-color: #ffffff; }
+
+        /* Header & Navegación entre Páginas */
+        header { background: var(--primary); color: var(--text-light); padding: 1rem 2rem; position: sticky; top: 0; z-index: 1000; display: flex; justify-content: space-between; align-items: center; border-bottom: 3px solid var(--accent); }
+        .logo { font-size: 1.4rem; font-weight: 800; color: var(--text-light); text-decoration: none; letter-spacing: 0.5px; }
+        .logo span { color: var(--accent); }
+        nav { display: flex; gap: 1rem; align-items: center; }
+        nav a { color: var(--text-light); text-decoration: none; font-size: 0.9rem; font-weight: 500; transition: color 0.3s; cursor: pointer; padding: 0.3rem 0.6rem; border-radius: 4px; }
+        nav a:hover, nav a.active { color: #ffffff; background: rgba(37, 99, 235, 0.2); }
+        .nav-btn { background: var(--accent) !important; color: #fff !important; font-weight: bold; }
+
+        /* Control de Visibilidad de Páginas */
+        .page { display: none; }
+        .page.active-page { display: block; animation: fadeIn 0.4s ease-in-out; }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(6px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Hero General */
+        .hero { background: linear-gradient(rgba(15,23,42,0.88), rgba(15,23,42,0.88)), url('https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=1500&q=80') center/cover; color: var(--text-light); text-align: center; padding: 5rem 1.5rem 6rem; }
+        .hero h1 { font-size: 2.6rem; margin-bottom: 1rem; text-transform: uppercase; }
+        .hero p { font-size: 1.15rem; max-width: 750px; margin: 0 auto 2rem; color: #cbd5e1; }
+
+        .page-header { background: var(--secondary); color: white; padding: 3rem 1.5rem; text-align: center; border-bottom: 3px solid var(--accent); }
+        .page-header h1 { font-size: 2.2rem; text-transform: uppercase; }
+        .page-header p { color: #94a3b8; max-width: 600px; margin: 0.5rem auto 0; }
+
+        /* Botones */
+        .btn { display: inline-block; background: var(--accent); color: #fff; padding: 0.8rem 1.6rem; text-decoration: none; font-weight: bold; border-radius: 4px; border: none; cursor: pointer; transition: background 0.3s; }
+        .btn:hover { background: var(--accent-hover); }
+        .btn-outline { background: transparent; color: var(--text-light); border: 2px solid var(--accent); margin-left: 0.5rem; }
+        .btn-outline:hover { background: var(--accent); color: #fff; }
+
+        /* Secciones y Grillas */
+        section { padding: 4rem 1.5rem; max-width: 1200px; margin: 0 auto; }
+        .section-title { text-align: center; font-size: 2rem; margin-bottom: 0.5rem; color: var(--primary); text-transform: uppercase; }
+        .section-subtitle { text-align: center; color: var(--text-muted); margin-bottom: 3rem; font-size: 1rem; }
+
+        .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; }
+        .grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 2.5rem; align-items: center; }
+
+        /* Tarjetas */
+        .card { background: var(--light-bg); padding: 2rem; border-radius: 8px; border-top: 4px solid var(--accent); box-shadow: 0 2px 8px rgba(0,0,0,0.04); }
+        .card h3 { margin-bottom: 0.8rem; color: var(--primary); }
+
+        /* Formulario */
+        .form-box { background: var(--secondary); color: white; padding: 2.5rem; border-radius: 8px; max-width: 800px; margin: 0 auto; }
+        .form-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem; margin-top: 1.5rem; }
+        .form-grid input, .form-grid select, .form-grid textarea { padding: 0.8rem; border-radius: 4px; border: 1px solid #475569; background: #334155; color: white; width: 100%; outline: none; }
+        .form-grid textarea { grid-column: 1 / -1; height: 110px; }
+
+        /* FAQ Accordion */
+        .faq-item { background: var(--light-bg); padding: 1.5rem; border-radius: 6px; margin-bottom: 1.2rem; border: 1px solid var(--border); }
+        .faq-item h3 { font-size: 1.1rem; color: var(--primary); margin-bottom: 0.5rem; }
+
+        /* Pasos del Proceso */
+        .step-card { background: #fff; border: 1px solid var(--border); border-radius: 8px; padding: 2rem; box-shadow: 0 4px 12px rgba(0,0,0,0.04); position: relative; margin-bottom: 1.5rem; }
+        .step-number { font-size: 2rem; font-weight: 800; color: var(--accent); background: #eff6ff; width: 50px; height: 50px; display: flex; align-items: center; justify-content: center; border-radius: 50%; margin-bottom: 1rem; }
+
+        /* Footer */
+        footer { background: #0f172a; color: #94a3b8; padding: 3rem 1.5rem 1.5rem; font-size: 0.9rem; margin-top: 3rem; }
+        .footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 2rem; max-width: 1200px; margin: 0 auto 2rem; }
+        .footer-grid h4 { color: white; margin-bottom: 1rem; text-transform: uppercase; font-size: 0.95rem; }
+        .footer-grid a { color: #94a3b8; text-decoration: none; display: block; margin-bottom: 0.5rem; cursor: pointer; }
+        .footer-grid a:hover { color: var(--accent); }
+        .footer-bottom { text-align: center; border-top: 1px solid #1e293b; padding-top: 1.5rem; color: #64748b; }
+
+        /* WhatsApp Flotante */
+        .whatsapp-float { position: fixed; bottom: 20px; right: 20px; background: #25d366; color: white; padding: 12px 22px; border-radius: 50px; text-decoration: none; font-weight: bold; box-shadow: 0 4px 15px rgba(0,0,0,0.3); z-index: 1000; }
+
+        @media (max-width: 768px) {
+            header { flex-direction: column; gap: 1rem; text-align: center; }
+            nav { flex-wrap: wrap; justify-content: center; }
+            .hero h1 { font-size: 2rem; }
+            .grid-2 { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header y Menú de Navegación -->
+    <header>
+        <a class="logo" onclick="navigateTo('inicio')">IMPORTA MI COCHE <span>| Galicia</span></a>
+        <nav>
+            <a onclick="navigateTo('inicio')" id="nav-inicio" class="active">Inicio</a>
+            <a onclick="navigateTo('servicios')" id="nav-servicios">Servicios</a>
+            <a onclick="navigateTo('proceso')" id="nav-proceso">Proceso de Importación</a>
+            <a onclick="navigateTo('nosotros')" id="nav-nosotros">Sobre Sergio</a>
+            <a onclick="navigateTo('faq')" id="nav-faq">FAQ</a>
+            <a onclick="navigateTo('contacto')" id="nav-contacto" class="nav-btn">Contacto / Encargo</a>
+        </nav>
+    </header>
+
+    <!-- ==================== PÁGINA 1: INICIO ==================== -->
+    <div id="page-inicio" class="page active-page">
+        <div class="hero">
+            <h1>Importación de Vehículos a la Carta en Galicia</h1>
+            <p>Soy Sergio, importador certificado de <strong>Importa Mi Coche</strong>. Gestiono personalmente la búsqueda, revisión técnica en origen (Alemania/Europa), transporte y liquidación de impuestos para entregarte tu vehículo listo para rodar.</p>
+            <div>
+                <a onclick="navigateTo('contacto')" class="btn">Solicitar estudio gratuito</a>
+                <a onclick="navigateTo('proceso')" class="btn btn-outline">Ver proceso paso a paso</a>
+            </div>
+        </div>
+
+        <section>
+            <h2 class="section-title">¿Por qué importar con Importa Mi Coche?</h2>
+            <p class="section-subtitle">Seguridad, transparencia y ahorro en el impuesto de matriculación e importación.</p>
+            <div class="grid-3">
+                <div class="card">
+                    <h3>Gestión Integral en Galicia</h3>
+                    <p>Tramitación completa del Impuesto de Matriculación ante Hacienda en Galicia, Ficha Reducida, ITV de importación y matriculación en la DGT.</p>
+                </div>
+                <div class="card">
+                    <h3>Verificación en Origen</h3>
+                    <p>Comprobación rigurosa del historial del vehículo, libro de mantenimiento, estado mecánico real y ausencia de daños estructurales.</p>
+                </div>
+                <div class="card">
+                    <h3>Tasación de tu Vehículo</h3>
+                    <p>Aceptamos y valoramos tu vehículo actual para facilitarte el acceso a tu nuevo coche de importación.</p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- ==================== PÁGINA 2: SERVICIOS ==================== -->
+    <div id="page-servicios" class="page">
+        <div class="page-header">
+            <h1>Nuestros Servicios de Importación</h1>
+            <p>Todas las soluciones necesarias para la compra e importación segura de tu vehículo en Galicia.</p>
+        </div>
+        <section>
+            <div class="grid-3">
+                <div class="card">
+                    <h3>Importación a la Carta</h3>
+                    <p>Localización de vehículos alemanes y europeos (Audi, BMW, Mercedes-Benz, Porsche) ajustados exactamente a tu presupuesto y equipamiento deseado.</p>
+                </div>
+                <div class="card">
+                    <h3>Matriculación e Impuestos</h3>
+                    <p>Cálculo exacto de las tablas de valoración y emisiones de CO2 para el pago del Impuesto de Matriculación sin sorpresas fiscales.</p>
+                </div>
+                <div class="card">
+                    <h3>Revisión e Inspección Técnica</h3>
+                    <p>Análisis en profundidad de la Ficha Técnica, Certificado de Conformidad Europeo (COC) y estado funcional previo a la compra.</p>
+                </div>
+                <div class="card">
+                    <h3>Transporte Asegurado</h3>
+                    <p>Logística de transporte internacional mediante camión portavehículos con seguro a todo riesgo directamente hasta tu domicilio o punto de entrega.</p>
+                </div>
+                <div class="card">
+                    <h3>Tasación y Parte de Pago</h3>
+                    <p>Valoración justa de tu coche actual para ser descontado del importe total del proyecto de importación.</p>
+                </div>
+                <div class="card">
+                    <h3>Asesoramiento Certificado</h3>
+                    <p>Atención directa por parte de Sergio, tu importador certificado de confianza, coordinando cada fase del expediente.</p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- ==================== PÁGINA 3: PROCESO DE IMPORTACIÓN ==================== -->
+    <div id="page-proceso" class="page">
+        <div class="page-header">
+            <h1>El Proceso de Importación Paso a Paso</h1>
+            <p>Transparencia total desde la selección inicial hasta la entrega de llaves.</p>
+        </div>
+        <section style="max-width: 900px;">
+            <div class="step-card">
+                <div class="step-number">1</div>
+                <h3>1. Búsqueda y Selección</h3>
+                <p>Estudiamos el vehículo que buscas o analizamos el enlace que nos envíes de plataformas europeas. Verificamos disponibilidad, historial y precio razonable de mercado.</p>
+            </div>
+            <div class="step-card">
+                <div class="step-number">2</div>
+                <h3>2. Verificación Documental y Técnica</h3>
+                <p>Nos aseguramos de que la documentación europea esté en regla, revisamos kilometraje, mantenimientos en servicio oficial y certificamos que el vehículo no ha tenido siniestros ocultos.</p>
+            </div>
+            <div class="step-card">
+                <div class="step-number">3</div>
+                <h3>3. Compra y Transporte Internacional</h3>
+                <p>Formalizamos la compra segura mediante factura o contrato con IVA desglosado y coordinamos el transporte asegurado en camión hacia España.</p>
+            </div>
+            <div class="step-card">
+                <div class="step-number">4</div>
+                <h3>4. ITV, Impuestos y Matriculación</h3>
+                <p>Pasamos la ITV de importación, liquidamos el Impuesto de Matriculación y Tráfico aquí en Galicia y te entregamos el coche con tus matriculas españolas definitivas.</p>
+            </div>
+        </section>
+    </div>
+
+    <!-- ==================== PÁGINA 4: SOBRE MI / NOSOTROS ==================== -->
+    <div id="page-nosotros" class="page">
+        <div class="page-header">
+            <h1>Sobre Importa Mi Coche</h1>
+            <p>Conoce quién está detrás de tu proyecto de importación.</p>
+        </div>
+        <section>
+            <div class="grid-2">
+                <div>
+                    <h2 style="color: var(--primary); margin-bottom: 1rem;">Hola, soy Sergio</h2>
+                    <p style="margin-bottom: 1rem;">Como <strong>importador certificado de Importa Mi Coche</strong> operando en la comunidad de Galicia, mi compromiso es acompañarte en todo el proceso de importación para que compres con total tranquilidad y con la máxima garantía jurídica y técnica.</p>
+                    <p style="margin-bottom: 1rem;">El mercado alemán y europeo ofrece vehículos con mejor equipamiento y mantenimiento que el mercado nacional, pero requiere un control exhaustivo del trámite fiscal y administrativo.</p>
+                    <p>Mi trabajo consiste en que tú solo te preocupes de estrenar coche, encargándome personalmente de la verificación de origen, transporte, Ficha Reducida e Impuesto de Matriculación.</p>
+                </div>
+                <div>
+                    <img src="https://images.unsplash.com/photo-1563720223185-11003d516935?auto=format&fit=crop&w=800&q=80" alt="Sergio Importa Mi Coche" style="width: 100%; border-radius: 8px; box-shadow: 0 8px 20px rgba(0,0,0,0.12);">
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- ==================== PÁGINA 5: FAQ ==================== -->
+    <div id="page-faq" class="page">
+        <div class="page-header">
+            <h1>Preguntas Frecuentes</h1>
+            <p>Resolvemos tus dudas sobre costes, plazos e impuestos de importación.</p>
+        </div>
+        <section style="max-width: 900px;">
+            <div class="faq-item">
+                <h3>¿Cuánto tarda el proceso de importación?</h3>
+                <p>El plazo estimado desde que se confirma la reserva del vehículo hasta que te lo entregamos matriculado en Galicia suele ser de entre 2 y 3 semanas.</p>
+            </div>
+            <div class="faq-item">
+                <h3>¿Cómo se calcula el Impuesto de Matriculación en Galicia?</h3>
+                <p>El importe depende del valor oficial del coche (según tablas de Hacienda) y su porcentaje de emisiones de CO2. Los vehículos eléctricos o híbridos con bajas emisiones pagan un 0% de impuesto.</p>
+            </div>
+            <div class="faq-item">
+                <h3>¿Los vehículos importados tienen garantía?</h3>
+                <p>Sí, disponen de la garantía oficial del fabricante a nivel europeo (si están dentro del periodo inicial) o se contrata una garantía mecánica con cobertura nacional completa.</p>
+            </div>
+            <div class="faq-item">
+                <h3>¿Puedo entregar mi coche actual como parte de pago?</h3>
+                <p>Sí, realizamos una tasación previa de tu coche actual para restar su valor de la operación global de importación.</p>
+            </div>
+        </section>
+    </div>
+
+    <!-- ==================== PÁGINA 6: CONTACTO Y ENCARGO ==================== -->
+    <div id="page-contacto" class="page">
+        <div class="page-header">
+            <h1>Contacto / Solicitar Encargo</h1>
+            <p>Escríbeme tus preferencias y te enviaré un presupuesto de importación detallado.</p>
+        </div>
+        <section>
+            <div class="form-box">
+                <h3 style="color: var(--accent); text-align: center;">Formulario de Importación a la Carta</h3>
+                <form onsubmit="event.preventDefault(); alert('Solicitud enviada correctamente a Sergio - Importa Mi Coche. Te contactaré en breve.');">
+                    <div class="form-grid">
+                        <input type="text" placeholder="Tu Nombre completo" required>
+                        <input type="text" placeholder="Teléfono / WhatsApp" required>
+                        <input type="text" placeholder="Marca y Modelo (ej. Audi A4 S-Line)" required>
+                        <input type="text" placeholder="Presupuesto Máximo (€)" required>
+                        <select>
+                            <option value="">Año mínimo deseado</option>
+                            <option>2023</option>
+                            <option>2022</option>
+                            <option>2021</option>
+                            <option>2020 o anterior</option>
+                        </select>
+                        <select>
+                            <option value="">¿Quieres entregar coche a cambio?</option>
+                            <option>No</option>
+                            <option>Sí, quiero tasación</option>
+                        </select>
+                        <textarea placeholder="Detalles o equipamiento indispensable (color, techo solar, cambio automático, paquete deportivo...)"></textarea>
+                        <button type="submit" class="btn" style="grid-column: 1 / -1; width: 100%;">Solicitar Presupuesto de Importación</button>
+                    </div>
+                </form>
+            </div>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-grid">
+            <div>
+                <h4 style="color: var(--accent);">Importa Mi Coche</h4>
+                <p>Servicio certificado de importación vehicular en la comunidad de Galicia. Gestión transparente y segura de vehículos de importación.</p>
+            </div>
+            <div>
+                <h4>Navegación</h4>
+                <a onclick="navigateTo('inicio')">Inicio</a>
+                <a onclick="navigateTo('servicios')">Servicios</a>
+                <a onclick="navigateTo('proceso')">Proceso de Importación</a>
+                <a onclick="navigateTo('nosotros')">Sobre Sergio</a>
+            </div>
+            <div>
+                <h4>Información</h4>
+                <a onclick="navigateTo('faq')">Preguntas Frecuentes</a>
+                <a onclick="navigateTo('contacto')">Solicitar Encargo</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2026 Importa Mi Coche - Sergio, Importador Certificado en Galicia.</p>
+        </div>
+    </footer>
+
+    <!-- WhatsApp Flotante -->
+    <a href="https://wa.me/" class="whatsapp-float" target="_blank">
+        💬 Contactar por WhatsApp
+    </a>
+
+    <!-- Lógica JavaScript para cambio de página sin recargar -->
+    <script>
+        function navigateTo(pageId) {
+            // Ocultar todas las páginas
+            const pages = document.querySelectorAll('.page');
+            pages.forEach(p => p.classList.remove('active-page'));
+
+            // Quitar clase active de navegación
+            const navLinks = document.querySelectorAll('nav a');
+            navLinks.forEach(link => link.classList.remove('active'));
+
+            // Mostrar la página seleccionada
+            const targetPage = document.getElementById('page-' + pageId);
+            if (targetPage) {
+                targetPage.classList.add('active-page');
+            }
+
+            // Marcar enlace activo
+            const activeNav = document.getElementById('nav-' + pageId);
+            if (activeNav) {
+                activeNav.classList.add('active');
+            }
+
+            // Scroll al inicio suavemente
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>
